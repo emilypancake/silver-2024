@@ -8,11 +8,14 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.LiftArm;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -23,9 +26,13 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   private final Drivetrain drivetrain = new Drivetrain(); // final = no change, final
-  private final Joystick joyRight = new Joystick(0);
-  private final Joystick joyLeft = new Joystick(1);
-  private final Drive driveCommand = new Drive(drivetrain, joyLeft, joyRight); 
+  private final Joystick joyL = new Joystick(0);
+  private final Joystick joyR = new Joystick(1);
+  private final Drive driveCommand = new Drive(drivetrain, joyL, joyR); 
+  private final Arm arm = new Arm();
+  private JoystickButton armUpButton = new JoystickButton(joyL, 4);
+  private JoystickButton armDownButton = new JoystickButton(joyR, 5);
+
 
 
   
@@ -41,6 +48,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();// configure the trigger bindings - when doing subsystems for arm??
     drivetrain.setDefaultCommand(driveCommand);
+
   }
 
   /**
@@ -60,6 +68,9 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    // arm 50% speed when button pressed, and stop when arm stop  AND liftarm constructor can be used fro the parameter
+    armUpButton.whileTrue(new LiftArm(arm, 0.3)); 
+    armDownButton.whileTrue(new LiftArm(arm, -0.3));
   }
 
   /**

@@ -5,7 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
+
 import frc.robot.commands.BasicAuto;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
@@ -83,5 +83,6 @@ public class RobotContainer {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
     return new BasicAuto(drivetrain, arm);
+    // testing auto is more dangerous than driving USE LOW SPEEDS and use e-stop  SPACE BAR if anything goes wrong (1 IS THE MAX -1 to 1)
   }
 }

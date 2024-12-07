@@ -7,7 +7,7 @@ public class Arm extends SubsystemBase {
     VictorSP arm;
 
     public Arm(){
-        arm = new VictorSP(0);   
+        arm = new VictorSP(2);   
     }
     public void liftArm(double speedA){
         arm.set(speedA);
